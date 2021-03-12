@@ -3,46 +3,26 @@ import {listDecks} from "../../utils/api/index.js"
 import Deck from "./Deck.js";
 import { Route,Switch,useRouteMatch,Link } from "react-router-dom"
 
-function Decks() {
-    const [decks,setDecks] = useState([]);
-    const {url} = useRouteMatch();
-    useEffect(() => {
-        setDecks([])
-        const abortController = new AbortController();
-        async function loadDecks() {
-        try {            
-                
-                 listDecks(abortController.signal).then(data => {setDecks(data)})
-                
-            }        
-        catch (error) {
-            console.log(error)
-        }
-    }
-    loadDecks();
-    },[])
-    let formattedDecks = decks.map(element => {
+function Decks({decks}) {
+    let formattedDecks = decks.map((element,index) => {
         return (
-        <div class="card">
+        <div class="card" key={index}>
   
   <div class="card-body">
     <h5 class="card-title">{element.name}</h5>
     <p class="card-text">{element.description}</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <Link to={`/decks/${element.id}`} class="btn btn-primary">Go somewhere</Link>
   </div>
-</div>)
-    })
-    console.log(formattedDecks)
+</div>)})
     return (
         <div>
             {formattedDecks}
            <div>
                </div> 
-            <Link to={`/decks/:deckId`}>n</Link>
-
-            <Route path={`/decks/:deckID`}>
-                <Deck decks={decks} />
-            </Route>
+            <Link to={`/decks`}>n</Link>
+            <Switch>
+            
+            </Switch>
         </div>
     );
 }
