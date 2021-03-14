@@ -5,21 +5,29 @@ import {BrowserRouter as Router,Route,Switch,useRouteMatch,Link} from 'react-rou
 import Decks from "./decks/Decks.js";
 import {listDecks} from "../utils/api/index.js"
 import Deck from "./decks/Deck.js";
+import CreateDeck from "./actions/CreateDeck.js"
+
 
 function Layout() {
   const [decks,setDecks] = useState([]);
+  
     useEffect(() => {
         
         const abortController = new AbortController();
-                  
-            listDecks(abortController.signal).then(setDecks);
-                  
-        
-      
+        async function loadDecks() {
+          try{          
+            let response = await listDecks(abortController.signal);
+            setDecks(response);
+          }
+          catch(error)  {
+            console.log(error,"what")
+          }     
+    }
+     loadDecks(); 
   
     return () => {abortController.abort()}
     },[])
-    
+    const {url} = useRouteMatch();
 
   return (
     <div>
@@ -27,12 +35,19 @@ function Layout() {
       <div className="container">
         <Router>
         <Switch>
+          
         <Route exact={true} path="/">
-          <Decks decks={decks}/>
+        <Link className="btn btn-primary" to="/decks/new"><span className="oi oi-plus"></span> Create Deck</Link>
+
+          <Decks decks={decks} />
+        </Route>
+        <Route path="/decks/new">
+          <CreateDeck decks={decks}/>
         </Route>
         <Route path={`/decks/:deckId`}>
-                <Deck decks={decks} />
-            </Route>
+            <Deck decks={decks} />
+        </Route>
+        
         <Route>
           <NotFound />
         </Route>

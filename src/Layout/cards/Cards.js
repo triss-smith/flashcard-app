@@ -1,15 +1,16 @@
 import React from 'react';
 
 function Cards({cards}) {
-    let cardsList = cards.map((element,index) => {
-        <div class="card" key={index}>
-  <div class="card-body">
-    {element.front}
-  </div>
-</div>
-
-    })
     console.log(cards)
+    let cardsList = cards.map((element,index) => {
+        return (
+        <div className="card" key={index}>
+            <div className="card-body">
+                {element.front}
+            </div>
+            <button className="btn btn-danger">Delete</button>
+        </div>
+        )})
     return (
         <div>
            {cardsList} 
