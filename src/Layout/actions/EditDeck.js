@@ -4,8 +4,8 @@ import {useHistory} from 'react-router-dom'
 function EditDeck({deck}) {
     const deckId = deck.id;
     const initial = {
-        name: "",
-        description: "",
+        name: deck.name,
+        description: deck.description,
     }
     const [formData,setFormData] = useState({...initial})
     let history = useHistory();
@@ -21,16 +21,19 @@ function EditDeck({deck}) {
         history.push(`/decks/${deck.id}`)
     }
 
-    console.log(deck.id)
     return (
        
               <div>
+            
             <nav aria-label="breadcrumb">
             <ol className="breadcrumb">
                 <li className="breadcrumb-item"><a href="/">Home</a></li>
-                <li className="breadcrumb-item active" aria-current="page">CreateDeck</li>
+                <li className="breadcrumb-item active" aria-current="page">Edit Deck</li>
             </ol>
             </nav>
+        
+        <div>{deck.name}</div>
+        
             <form onSubmit={handleSubmit}>
                <input 
                type="text"

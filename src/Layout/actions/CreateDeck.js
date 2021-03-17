@@ -20,14 +20,13 @@ function CreateDeck({decks}) {
         history.push(`/decks/${decks.length - 1}`)
     }
 
-    console.log(decks)
     return (
        
               <div>
             <nav aria-label="breadcrumb">
             <ol className="breadcrumb">
                 <li className="breadcrumb-item"><a href="/">Home</a></li>
-                <li className="breadcrumb-item active" aria-current="page">CreateDeck</li>
+                <li className="breadcrumb-item active" aria-current="page">Create Deck</li>
             </ol>
             </nav>
             <form onSubmit={handleSubmit}>
@@ -41,15 +40,15 @@ function CreateDeck({decks}) {
                onChange={handleChange}
                /> 
                <br></br>
-               <input
-               type="text"
+               <textarea
                required="true"
                placeholder="Description"
                name="description"
                value={formData.description}
                required={true}
                onChange={handleChange}
-               />
+               >
+              </textarea>
                <button type="submit">Submit</button>
             </form>
         </div>

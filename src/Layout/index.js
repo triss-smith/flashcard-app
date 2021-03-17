@@ -6,7 +6,7 @@ import Decks from "./decks/Decks.js";
 import {listDecks} from "../utils/api/index.js"
 import Deck from "./decks/Deck.js";
 import CreateDeck from "./actions/CreateDeck.js"
-
+import EditDeck from "./actions/CreateDeck.js"
 
 function Layout() {
   const [decks,setDecks] = useState([]);
@@ -20,7 +20,7 @@ function Layout() {
             setDecks(response);
           }
           catch(error)  {
-            console.log(error,"what")
+            console.log(error,"index.js decks fetch")
           }     
     }
      loadDecks(); 
@@ -28,16 +28,15 @@ function Layout() {
     return () => {abortController.abort()}
     },[])
     const {url} = useRouteMatch();
-
   return (
     <div>
       <Header />
       <div className="container">
-        <Router>
+       
         <Switch>
           
         <Route exact={true} path="/">
-        <Link className="btn btn-primary" to="/decks/new"><span className="oi oi-plus"></span> Create Deck</Link>
+        <Link className="btn btn-primary" to="/decks/new">Create Deck</Link>
 
           <Decks decks={decks} />
         </Route>
@@ -47,12 +46,12 @@ function Layout() {
         <Route path={`/decks/:deckId`}>
             <Deck decks={decks} />
         </Route>
-        
+          
         <Route>
           <NotFound />
         </Route>
         </Switch>
-        </Router>
+        
       </div>
     </div>
   )
