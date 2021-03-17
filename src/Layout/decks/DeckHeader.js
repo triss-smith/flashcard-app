@@ -18,7 +18,7 @@ function DeckHeader ({deck,url}) {
                     <p className="card-text">{deck.description}</p>
                     <a href={`${url}/edit`} className="btn btn-secondary mx-1"><span className="oi oi-pencil"></span> Edit</a>
                     <a href={`${url}/study`} className="btn btn-primary mx-1">Study</a>
-                    <a href={`${url}/cards/add`} className="btn btn-primary mx-1">Add Cards</a>
+                    <a href={`${url}/cards/new`} className="btn btn-primary mx-1">Add Cards</a>
 
                 </div>
             </div>   

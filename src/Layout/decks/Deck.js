@@ -18,8 +18,7 @@ function Deck({decks}) {
         
         async function loadDeck() {
             try{
-                let deckResponse = await readDeck(deckId,abortController.signal);
-                
+                let deckResponse = await readDeck(deckId,abortController.signal);            
                 
                 setDeck(deckResponse);
                 
@@ -32,11 +31,11 @@ function Deck({decks}) {
         return () => {
             abortController.abort();
         }
-    },[decks])
+    },[])
     let {url} = useRouteMatch();
      if(!deck.cards) {
        return (
-       <div> <NotFound/></div>
+       <div><p>Loading..</p></div>
        )
      }
     
@@ -45,7 +44,7 @@ function Deck({decks}) {
             <Switch>
               <Route path={`${url}/study`}>
                 
-                <Study deck={deck} url={url}/>
+                <Study deck={deck} cards={deck.cards} url={url}/>
               </Route>
             <Route path={`${url}/edit`}>
                 <EditDeck deck={deck}/>

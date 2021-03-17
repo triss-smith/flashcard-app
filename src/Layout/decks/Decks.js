@@ -5,6 +5,16 @@ import { Route,Switch,useRouteMatch,Link,useHistory } from "react-router-dom";
 import CreateDeck from "../actions/CreateDeck.js"
 
 
+function deleteHandler(deck) {
+    
+    const abortController = new AbortController();
+    
+    if(window.confirm("Delete this deck?")) {
+
+       deleteDeck(deck.id,abortController.signal)
+        
+            }}
+
 function Decks({decks}) {
      
     /*useEffect(() => {
@@ -15,16 +25,9 @@ function Decks({decks}) {
         }
       }
     })*/
-    let history = useHistory();
+    
   
-     function deleteHandler(deck) {
-        const abortController = new AbortController();
-        
-        if(window.confirm("Delete this deck?")) {
-
-           deleteDeck(deck.id,abortController.signal)
-            history.push("/")
-                }}
+     
     let formattedDecks = decks.map((element,index) => {
       return (<DeckItem deck={element} key={index}/>)
     })
@@ -42,7 +45,8 @@ function Decks({decks}) {
         </div>
     );
 }
-function DeckItem({deck}) {   
+function DeckItem({deck}) {  
+    let history = useHistory(); 
         return (
         <div className="card" key={deck.id}>
   
@@ -52,7 +56,12 @@ function DeckItem({deck}) {
     <p className="card-length">{`${deck.cards.length} cards`} </p>
     <Link to={`/decks/${deck.id}`} className="btn btn-secondary mx-1">View</Link>
     <Link to={`/decks/${deck.id}/study`} className="btn btn-primary mx-1">Study</Link>
-    <button className="btn btn-danger mx-1" onClick={() => deleteHandler(element)}>Delete</button>
+    <button className="btn btn-danger mx-1" onClick={() => {
+        deleteHandler(deck)
+        
+        history.push("/")
+    }
+        }>Delete</button>
   </div>
 </div>)}
 

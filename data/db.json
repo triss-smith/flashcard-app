@@ -11,18 +11,5 @@
       "id": 2
     }
   ],
-  "cards": [
-    {
-      "id": 1,
-      "front": "Front",
-      "back": "Back",
-      "deckId": 1
-    },
-    {
-      "id": 2,
-      "front": "Front",
-      "back": "Back",
-      "deckId": 1
-    }
-  ]
+  "cards": []
 }
